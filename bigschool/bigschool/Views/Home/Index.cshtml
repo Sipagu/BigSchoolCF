@@ -17,6 +17,9 @@
 
 <div class="row">
     <ul class="course">
+        <br />
+        <b>Các Khóa Học: </b>
+        <br />
         @foreach (var course in Model)
         {
             <li>
@@ -30,7 +33,7 @@
                 </div>
                 <div class="details">
                     <span class="lecture">
-                        @course.Name
+                        @course.Name  
                         @if (course.islogin)
                         {
                             if (course.isShowFollow)
@@ -70,13 +73,13 @@
                 $.post("/api/attendances", { Id:button.attr("data-course-id") })
                     .done(function (result) {
                         if (result == "cancel") {
-                            alert("Cancel register course sucessfully!")
+                            alert("Hủy khóa học thành công!")
                             button.removeClass("btn-info")
                             button.addClass("btn-default")
                             button.text("Going?");
                         }
                         else {
-                            alert("Register course sucessfully!")
+                            alert("Đăng ký khóa học thành công!")
                             button.removeClass("btn-default")
                             button.addClass("btn-info")
                             button.text("Going");
@@ -98,7 +101,9 @@
                                     $(this).text("Follow");
                                 }
                             });
-                            alert("unFollow sucessfully")
+                            alert("Bỏ theo dõi thành công")
+                        } else if (result == "cannotFollowYourself") {
+                            alert("Không thể theo dõi chính mình");
                         } else {
                             $('.js-tongle-follow').each(function (i, obj) {
                                 if ($(this).attr('data-user-id') == followee) {
@@ -107,10 +112,10 @@
                                     $(this).text("Following");
                                 }
                             });
-                            alert("Follow sucessfully")
+                            alert("Theo dõi thành công")
                         }
                     }).fail(function () {
-                        alert("Something fail");
+                        alert("Có gì đó sai sai bạn ơi");
                     });
             });
         });

@@ -15,9 +15,10 @@ namespace bigschool.Controllers
             //user login là người theo dõi, follow.FolloweeId là người được theo dõi
             var userID = User.Identity.GetUserId();
             if (userID == null)
-                return BadRequest("Please login first!");
+                return BadRequest("Làm ơn đăng nhập!");
             if (userID == follow.FolloweeId)
-                return BadRequest("Can not follow myself!");
+                //return BadRequest("Không thể tự follow chính mình!");
+                return Ok("cannotFollowYourself");
             BigSchoolContext context = new BigSchoolContext();
             //kiểm tra xem mã userID đã được theo dõi chưa
             Following find = context.Followings.FirstOrDefault(p => p.FollowerId == userID && p.FolloweeId == follow.FolloweeId);

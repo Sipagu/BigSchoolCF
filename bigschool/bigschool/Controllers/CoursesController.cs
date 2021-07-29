@@ -103,6 +103,7 @@ namespace bigschool.Controllers
             var id = context.Courses.SingleOrDefault(p => p.Id == objCourse.Id);
 
             ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            
             id.LecturerId = user.Id;
             id.Place = objCourse.Place;
             id.DateTime = objCourse.DateTime;
